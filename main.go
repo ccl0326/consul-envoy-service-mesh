@@ -68,7 +68,7 @@ func main() {
 
 	ctx := context.Background()
 
-	config := cache.NewSnapshotCache(true, Hasher{}, nil)
+	config := cache.NewSnapshotCache(true, Hasher{}, lib.DefaultCacheLogger{})
 
 	consulUrl := fmt.Sprintf("%s:%d", consulHost, consulPort)
 	a := agent.NewAgent(consulUrl, "", consulDC)
