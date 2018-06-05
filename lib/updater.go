@@ -112,6 +112,10 @@ func (u *Updater) updateEndpoint() {
 
 func (u *Updater) writeSnapshot() {
 	glog.V(10).Infof("Write snapshot called, version is %d", u.SnapshotId)
+	glog.V(10).Infof("%v", u.grpcEndpoints)
+	glog.V(10).Infof("%v", u.grpcClusters)
+	glog.V(10).Infof("%v", u.grpcRoutes)
+	glog.V(10).Infof("%v", u.grpcListeners)
 	version := fmt.Sprintf("version%d", u.SnapshotId)
 	snapshot := cpCache.NewSnapshot(version,
 		u.grpcEndpoints,
