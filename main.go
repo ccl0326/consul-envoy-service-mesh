@@ -77,7 +77,7 @@ func main() {
 
 	go RunCacheUpdate(ctx, config, consulUrl, configPath, a, events)
 
-	server := gcp.NewServer(cache.Cache(config), nil)
+	server := gcp.NewServer(cache.Cache(config), lib.DefaultCallbacks{})
 	grpcServer := grpc.NewServer(
 		grpc.StreamInterceptor(grpc_prometheus.StreamServerInterceptor),
 		grpc.UnaryInterceptor(grpc_prometheus.UnaryServerInterceptor),
