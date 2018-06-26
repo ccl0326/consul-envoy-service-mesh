@@ -3,6 +3,7 @@ package lib
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 
 	envoy_api_v2_core "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	envoy_api_v2_route "github.com/envoyproxy/go-control-plane/envoy/api/v2/route"
@@ -128,12 +129,8 @@ func (c *ClusterConfig) UnmarshalJSON(b []byte) error {
 	healthchecks := []*envoy_api_v2_core.HealthCheck{}
 	for _, hc := range aux.Healthchecks {
 		healthcheck := envoy_api_v2_core.HealthCheck{
-			Timeout: &types.Duration{
-				Nanos: int32(hc.Timeout * 1000000),
-			},
-			Interval: &types.Duration{
-				Nanos: int32(hc.Timeout * 1000000),
-			},
+			Timeout:  types.DurationProto(time.Duration(hc.Timeout * 1000000)),
+			Interval: types.DurationProto(time.Duration(hc.Interval * 1000000)),
 			UnhealthyThreshold: &types.UInt32Value{
 				Value: uint32(hc.UnhealthyThreshold),
 			},
