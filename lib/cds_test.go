@@ -121,8 +121,8 @@ func TestShouldHaveClusterWithHttpHealthCheck(t *testing.T) {
 	}
 	envoyCluster := NewCluster(*cluster, true).Cluster()
 	hc := envoyCluster.HealthChecks[0]
-	assert.Equal(t, int32(1000000000), hc.Timeout.Nanos)
-	assert.Equal(t, int32(1000000000), hc.Interval.Nanos)
+	assert.Equal(t, int64(1), hc.Timeout.Seconds)
+	assert.Equal(t, int64(1), hc.Interval.Seconds)
 	assert.Equal(t, uint32(6), hc.HealthyThreshold.GetValue())
 	assert.Equal(t, uint32(5), hc.UnhealthyThreshold.GetValue())
 	assert.Equal(t, "/status", hc.GetHttpHealthCheck().Path)
@@ -155,8 +155,8 @@ func TestShouldHaveClusterWithTCPHealthCheck(t *testing.T) {
 	}
 	envoyCluster := NewCluster(*cluster, true).Cluster()
 	hc := envoyCluster.HealthChecks[0]
-	assert.Equal(t, int32(1000000000), hc.Timeout.Nanos)
-	assert.Equal(t, int32(1000000000), hc.Interval.Nanos)
+	assert.Equal(t, int64(1), hc.Timeout.Seconds)
+	assert.Equal(t, int64(1), hc.Interval.Seconds)
 	assert.Equal(t, uint32(6), hc.HealthyThreshold.GetValue())
 	assert.Equal(t, uint32(5), hc.UnhealthyThreshold.GetValue())
 	assert.Equal(t, "text:\"\" ", hc.GetTcpHealthCheck().Send.String())
@@ -188,8 +188,8 @@ func TestShouldHaveClusterWithRedisHealthCheck(t *testing.T) {
 	}
 	envoyCluster := NewCluster(*cluster, true).Cluster()
 	hc := envoyCluster.HealthChecks[0]
-	assert.Equal(t, int32(1000000000), hc.Timeout.Nanos)
-	assert.Equal(t, int32(1000000000), hc.Interval.Nanos)
+	assert.Equal(t, int64(1), hc.Timeout.Seconds)
+	assert.Equal(t, int64(1), hc.Interval.Seconds)
 	assert.Equal(t, uint32(6), hc.HealthyThreshold.GetValue())
 	assert.Equal(t, uint32(5), hc.UnhealthyThreshold.GetValue())
 	assert.Equal(t, "", hc.GetRedisHealthCheck().String())
@@ -221,8 +221,8 @@ func TestShouldHaveClusterWithGrpcHealthCheck(t *testing.T) {
 	}
 	envoyCluster := NewCluster(*cluster, true).Cluster()
 	hc := envoyCluster.HealthChecks[0]
-	assert.Equal(t, int32(1000000000), hc.Timeout.Nanos)
-	assert.Equal(t, int32(1000000000), hc.Interval.Nanos)
+	assert.Equal(t, int64(1), hc.Timeout.Seconds)
+	assert.Equal(t, int64(1), hc.Interval.Seconds)
 	assert.Equal(t, uint32(6), hc.HealthyThreshold.GetValue())
 	assert.Equal(t, uint32(5), hc.UnhealthyThreshold.GetValue())
 	assert.Equal(t, "", hc.GetGrpcHealthCheck().String())
