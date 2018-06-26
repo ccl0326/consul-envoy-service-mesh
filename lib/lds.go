@@ -132,7 +132,7 @@ func (s *lds) errorLog(statPrefix string) *envoy_config_filter_accesslog_v2.Acce
 				},
 			},
 		},
-		Config: s.accessLogConfig(fmt.Sprintf("%s_error.log", statPrefix)),
+		Config: s.accessLogConfig("/dev/stderr"),
 	}
 }
 
@@ -144,7 +144,7 @@ func (s *lds) accessLog(statPrefix string) *envoy_config_filter_accesslog_v2.Acc
 				NotHealthCheckFilter: &envoy_config_filter_accesslog_v2.NotHealthCheckFilter{},
 			},
 		},
-		Config: s.accessLogConfig(fmt.Sprintf("%s.log", statPrefix)),
+		Config: s.accessLogConfig("/dev/stdout"),
 	}
 }
 
