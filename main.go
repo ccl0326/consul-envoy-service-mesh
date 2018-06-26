@@ -51,8 +51,8 @@ var (
 	configPath string
 )
 
-var ResultQueue = make(chan interface{}, 1000)
-var ErrorQueue = make(chan error, 1000)
+var ResultQueue = make(chan interface{}, 10000)
+var ErrorQueue = make(chan error, 10000)
 
 func init() {
 	flag.UintVar(&xdsPort, "xds", 18000, "xDS server port")
@@ -73,7 +73,7 @@ func main() {
 	consulUrl := fmt.Sprintf("%s:%d", consulHost, consulPort)
 	a := agent.NewAgent(consulUrl, "", consulDC)
 
-	events := pubsub.New(1000)
+	events := pubsub.New(10000)
 
 	go RunCacheUpdate(ctx, config, consulUrl, configPath, a, events)
 
