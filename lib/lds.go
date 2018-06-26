@@ -13,7 +13,6 @@ import (
 
 	"github.com/gogo/protobuf/types"
 
-	"fmt"
 	"path/filepath"
 )
 
@@ -66,7 +65,7 @@ func (s *lds) router() *types.Struct {
 
 func (s *lds) accessLogConfig(fileName string) *types.Struct {
 	accessLogConfig := &envoy_config_filter_accesslog_v2.FileAccessLog{
-		Path:   fmt.Sprintf("/var/log/envoy/%s", fileName),
+		Path:   fileName,
 		Format: "[%START_TIME%] \"%REQ(:METHOD)% %REQ(X-ENVOY-ORIGINAL-PATH?:PATH)% %PROTOCOL%\" %RESPONSE_CODE% %RESPONSE_FLAGS% %BYTES_RECEIVED% %BYTES_SENT% %DURATION% %RESP(X-ENVOY-UPSTREAM-SERVICE-TIME)% \"%REQ(X-FORWARDED-FOR)%\" \"%REQ(USER-AGENT)%\" \"%REQ(X-REQUEST-ID)%\" \"%REQ(:AUTHORITY)%\"\n",
 	}
 	pbst, err := util.MessageToStruct(accessLogConfig)
